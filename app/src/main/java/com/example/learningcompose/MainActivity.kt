@@ -16,8 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.learningcompose.ui.theme.LearningComposeTheme
+import com.example.learningcompose.ui.theme.Typography
+import kotlin.text.Typography
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,8 +59,10 @@ fun ExpandableCard(title: String, description: String) {
         Column {
             Text(text = title)
 
-            if(expanded) {
-                Text(text = description)
+            if (expanded) {
+                Text(
+                    text = description,
+                )
                 IconButton(onClick = {
                     expanded = false
                 }) {
@@ -79,7 +84,13 @@ fun InputField() {
 
     TextField(value = "", onValueChange = {
         name = it
-    }, label = { Text(text = "Id here")})
+    }, label = {
+        Text(
+            text = "Id here",
+            style = Typography.h3
+
+        )
+    })
 
 }
 
