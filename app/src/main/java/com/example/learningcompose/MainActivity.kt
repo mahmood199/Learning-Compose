@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    TestPreview1("Android")
                 }
             }
         }
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(
+fun TestPreview1(
     name: String,
 ) {
     Column(
@@ -57,6 +57,29 @@ fun Greeting(
                 .height(200.dp), color = Color.Blue
         ) {}
 
+    }
+}
+
+@Composable
+fun TestPreview2() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Surface(
+            color = Color.Red,
+            modifier = Modifier
+                .width(200.dp)
+                .weight(2f)
+        ) {}
+        CustomItem(
+            1f,
+            color = Color.Green
+        )
+        CustomItem(
+            1f,
+            color = Color.Blue
+        )
     }
 }
 
@@ -116,11 +139,21 @@ fun CTA() {
     }
 }
 
+@Composable
+fun ColumnScope.CustomItem(weight: Float, color: Color) {
+    Surface(
+        color = color,
+        modifier = Modifier
+            .width(200.dp)
+            .weight(weight)
+    ) {}
+}
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        Greeting("Android")
+        TestPreview2()
     }
 }
