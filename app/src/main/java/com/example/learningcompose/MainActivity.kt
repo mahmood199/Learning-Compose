@@ -14,9 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 import com.example.learningcompose.ui.theme.Typography
 
@@ -242,10 +245,32 @@ fun Boxing() {
 }
 
 
+@Composable
+fun Texting() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.app_name),
+            modifier = Modifier
+                .background(Color.Yellow)
+                .padding(16.dp)
+                .fillMaxWidth(),
+            fontSize = 30.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.ExtraBold,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        Boxing()
+        Texting()
     }
 }
