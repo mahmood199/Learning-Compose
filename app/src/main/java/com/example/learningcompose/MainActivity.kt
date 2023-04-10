@@ -7,6 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearningComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Boxing()
+                Texting()
             }
         }
     }
@@ -247,23 +249,34 @@ fun Boxing() {
 
 @Composable
 fun Texting() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = stringResource(id = R.string.app_name),
-            modifier = Modifier
-                .background(Color.Yellow)
-                .padding(16.dp)
-                .fillMaxWidth(),
-            fontSize = 30.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.ExtraBold,
-            textAlign = TextAlign.Center,
-            maxLines = 1
-        )
+    SelectionContainer {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = stringResource(id = R.string.app_name),
+                modifier = Modifier
+                    .background(Color.Yellow)
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                fontSize = 30.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.ExtraBold,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+            )
+            DisableSelection {
+                Text(
+                    text = "Hehe... Not selectable",
+                    modifier = Modifier
+                        .background(Color.Yellow)
+                        .padding(16.dp)
+                        .wrapContentSize(),
+                )
+            }
+        }
     }
 }
 
