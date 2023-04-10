@@ -4,15 +4,22 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 import com.example.learningcompose.ui.theme.Typography
 
@@ -22,12 +29,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearningComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Yellow
-                ) {
-                    TestPreview1("Android")
-                }
+                Boxing()
             }
         }
     }
@@ -168,7 +170,8 @@ fun ColumnScope.CustomItem(weight: Float, color: Color) {
     Surface(
         color = color,
         modifier = Modifier
-            .width(200.dp)
+            .fillMaxSize()
+            .padding(10.dp)
             .weight(weight)
     ) {}
 }
@@ -178,9 +181,90 @@ fun RowScope.CustomItem(color: Color) {
     Surface(
         color = color,
         modifier = Modifier
-            .width(50.dp)
-            .height(200.dp)
+            .fillMaxSize()
+            .padding(10.dp)
+            .weight(1f)
     ) {}
+}
+
+@Composable
+fun StevdzaSanVideoThumbnail() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f),
+        ) {
+            CustomItem(weight = 1f, color = Color.Red)
+            CustomItem(weight = 1f, color = Color.Blue)
+            CustomItem(weight = 1f, color = Color.Yellow)
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+        ) {
+            CustomItem(color = Color.Red)
+            CustomItem(color = Color.Blue)
+            CustomItem(color = Color.Yellow)
+        }
+    }
+}
+
+@Composable
+fun Boxing() {
+    Box(
+        modifier = Modifier
+            .background(Color.Blue)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .background(Color.Yellow)
+                .verticalScroll(rememberScrollState()),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Hi there Mahmood. Six startups experience." +
+                        " Kidding like a kid. This ain't scrollable????." +
+                        " We need to make it that way then",
+                style = Typography.h4,
+                textAlign = TextAlign.Center,
+            )
+        }
+    }
+}
+
+
+@Composable
+fun Texting() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.app_name),
+            modifier = Modifier
+                .background(Color.Yellow)
+                .padding(16.dp)
+                .fillMaxWidth(),
+            fontSize = 30.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.ExtraBold,
+            textAlign = TextAlign.Center,
+            maxLines = 1
+        )
+    }
 }
 
 
@@ -188,6 +272,6 @@ fun RowScope.CustomItem(color: Color) {
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        TestPreview3()
+        Texting()
     }
 }
