@@ -261,7 +261,8 @@ fun Texting() {
             fontSize = 30.sp,
             color = Color.Black,
             fontWeight = FontWeight.ExtraBold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            maxLines = 1
         )
     }
 }
