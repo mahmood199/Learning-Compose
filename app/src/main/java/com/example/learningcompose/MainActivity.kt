@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -86,6 +85,29 @@ fun TestPreview2() {
 }
 
 @Composable
+fun TestPreview3() {
+    Row(
+        modifier = Modifier.fillMaxSize(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Surface(
+            color = Color.Red,
+            modifier = Modifier
+                .width(50.dp)
+                .height(200.dp)
+        ) {}
+        CustomItem(
+            color = Color.Green
+        )
+        CustomItem(
+            color = Color.Blue
+        )
+    }
+
+}
+
+@Composable
 fun ExpandableCard(title: String, description: String) {
     var expanded by remember {
         mutableStateOf(false)
@@ -151,11 +173,21 @@ fun ColumnScope.CustomItem(weight: Float, color: Color) {
     ) {}
 }
 
+@Composable
+fun RowScope.CustomItem(color: Color) {
+    Surface(
+        color = color,
+        modifier = Modifier
+            .width(50.dp)
+            .height(200.dp)
+    ) {}
+}
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        TestPreview2()
+        TestPreview3()
     }
 }
