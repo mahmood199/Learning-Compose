@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
@@ -22,12 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearningComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Yellow
-                ) {
-                    TestPreview1("Android")
-                }
+                Boxing()
             }
         }
     }
@@ -217,11 +216,36 @@ fun StevdzaSanVideoThumbnail() {
     }
 }
 
+@Composable
+fun Boxing() {
+    Box(
+        modifier = Modifier
+            .background(Color.Blue)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .background(Color.Yellow)
+                .verticalScroll(rememberScrollState()),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Hi there Mahmood. Six startups experience." +
+                        " Kidding like a kid. This ain't scrollable????." +
+                        " We need to make it that way then",
+                style = Typography.h4,
+                textAlign = TextAlign.Center,
+            )
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        StevdzaSanVideoThumbnail()
+        Boxing()
     }
 }
