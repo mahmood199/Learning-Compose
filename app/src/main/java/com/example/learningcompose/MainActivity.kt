@@ -168,7 +168,8 @@ fun ColumnScope.CustomItem(weight: Float, color: Color) {
     Surface(
         color = color,
         modifier = Modifier
-            .width(200.dp)
+            .fillMaxSize()
+            .padding(10.dp)
             .weight(weight)
     ) {}
 }
@@ -178,9 +179,42 @@ fun RowScope.CustomItem(color: Color) {
     Surface(
         color = color,
         modifier = Modifier
-            .width(50.dp)
-            .height(200.dp)
+            .fillMaxSize()
+            .padding(10.dp)
+            .weight(1f)
     ) {}
+}
+
+@Composable
+fun StevdzaSanVideoThumbnail() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f),
+        ) {
+            CustomItem(weight = 1f, color = Color.Red)
+            CustomItem(weight = 1f, color = Color.Blue)
+            CustomItem(weight = 1f, color = Color.Yellow)
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+        ) {
+            CustomItem(color = Color.Red)
+            CustomItem(color = Color.Blue)
+            CustomItem(color = Color.Yellow)
+        }
+    }
 }
 
 
@@ -188,6 +222,6 @@ fun RowScope.CustomItem(color: Color) {
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        TestPreview3()
+        StevdzaSanVideoThumbnail()
     }
 }
