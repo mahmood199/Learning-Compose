@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearningComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Boxing()
+                Texting()
             }
         }
     }
