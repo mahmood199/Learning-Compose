@@ -299,63 +299,32 @@ fun Texting() {
                         append("2")
                     }
                 })
-
             }
 
+            DisableSelection {
+                Text(buildAnnotatedString {
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                        )
+                    ) {
+                        append("x")
+                    }
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = MaterialTheme.typography.overline.fontSize,
+                            fontWeight = FontWeight.Normal,
+                            baselineShift = BaselineShift.Superscript
+                        )
+                    ) {
+                        append("2")
+                    }
+                })
+            }
         }
     }
 }
 
-@Composable
-fun SuperScriptText(
-    normalText: String,
-    superText: String,
-) {
-    Text(buildAnnotatedString {
-        withStyle(
-            style = SpanStyle(
-                fontSize = MaterialTheme.typography.subtitle1.fontSize,
-            )
-        ) {
-            append(normalText)
-        }
-        withStyle(
-            style = SpanStyle(
-                fontSize = MaterialTheme.typography.overline.fontSize,
-                fontWeight = FontWeight.Normal,
-                baselineShift = BaselineShift.Subscript
-            )
-        ) {
-            append(superText)
-        }
-    })
-}
-
-@Composable
-fun SubScriptText() {
-    DisableSelection {
-        Text(buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    fontSize = MaterialTheme.typography.subtitle1.fontSize,
-                )
-            ) {
-                append("12")
-            }
-            withStyle(
-                style = SpanStyle(
-                    fontSize = MaterialTheme.typography.overline.fontSize,
-                    fontWeight = FontWeight.Normal,
-                    baselineShift = BaselineShift.Subscript
-                )
-            ) {
-                append("2")
-            }
-        })
-
-    }
-
-}
 
 
 @Preview(showBackground = true)
@@ -364,8 +333,6 @@ fun DefaultPreview() {
     LearningComposeTheme {
         Column {
             Texting()
-            SuperScriptText(normalText = "12", superText = "2")
-            SubScriptText()
         }
     }
 }
