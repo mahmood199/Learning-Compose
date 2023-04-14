@@ -7,6 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -15,8 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -247,24 +253,108 @@ fun Boxing() {
 
 @Composable
 fun Texting() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = stringResource(id = R.string.app_name),
-            modifier = Modifier
-                .background(Color.Yellow)
-                .padding(16.dp)
-                .fillMaxWidth(),
-            fontSize = 30.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.ExtraBold,
-            textAlign = TextAlign.Center,
-            maxLines = 1
-        )
+    SelectionContainer {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = stringResource(id = R.string.app_name),
+                modifier = Modifier
+                    .background(Color.Yellow)
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                fontSize = 30.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.ExtraBold,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+            )
+            DisableSelection {
+                Text(
+                    text = "Hehe... Not selectable",
+                    modifier = Modifier
+                        .background(Color.Yellow)
+                        .padding(16.dp)
+                        .wrapContentSize(),
+                )
+            }
+            DisableSelection {
+                Text(buildAnnotatedString {
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                        )
+                    ) {
+                        append("x")
+                    }
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = MaterialTheme.typography.overline.fontSize,
+                            fontWeight = FontWeight.Normal,
+                            baselineShift = BaselineShift.Subscript
+                        )
+                    ) {
+                        append("2")
+                    }
+                })
+
+            }
+
+        }
     }
+}
+
+@Composable
+fun SuperScriptText(
+    normalText: String,
+    superText: String,
+) {
+    Text(buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                fontSize = MaterialTheme.typography.subtitle1.fontSize,
+            )
+        ) {
+            append(normalText)
+        }
+        withStyle(
+            style = SpanStyle(
+                fontSize = MaterialTheme.typography.overline.fontSize,
+                fontWeight = FontWeight.Normal,
+                baselineShift = BaselineShift.Subscript
+            )
+        ) {
+            append(superText)
+        }
+    })
+}
+
+@Composable
+fun SubScriptText() {
+    DisableSelection {
+        Text(buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                )
+            ) {
+                append("12")
+            }
+            withStyle(
+                style = SpanStyle(
+                    fontSize = MaterialTheme.typography.overline.fontSize,
+                    fontWeight = FontWeight.Normal,
+                    baselineShift = BaselineShift.Subscript
+                )
+            ) {
+                append("2")
+            }
+        })
+
+    }
+
 }
 
 
@@ -272,6 +362,10 @@ fun Texting() {
 @Composable
 fun DefaultPreview() {
     LearningComposeTheme {
-        Texting()
+        Column {
+            Texting()
+            SuperScriptText(normalText = "12", superText = "2")
+            SubScriptText()
+        }
     }
 }
