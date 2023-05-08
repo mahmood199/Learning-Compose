@@ -10,33 +10,35 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
-import com.google.android.material.color.MaterialColors
 
 class CodeLabSampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             LearningComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                MyApp(modifier = Modifier.fillMaxSize())
             }
         }
     }
 }
 
 @Composable
+private fun MyApp(modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier,
+        color = MaterialTheme.colors.secondary
+    ) {
+        Greeting("Android")
+    }
+}
+
+@Composable
 fun Greeting(name: String) {
     Surface(color = MaterialTheme.colors.secondary) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+        Text(text = "Hello $name!")
     }
 }
 
@@ -44,6 +46,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview2() {
     LearningComposeTheme {
-        Greeting("Android")
+        MyApp()
     }
 }
