@@ -26,6 +26,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
@@ -37,6 +38,18 @@ class CodeLabSampleActivity : ComponentActivity() {
             LearningComposeTheme {
 
             }
+        }
+    }
+}
+
+@Composable
+fun LoopingText(
+    modifier: Modifier = Modifier,
+    names: List<String> = List(100) { "$it" },
+) {
+    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
+        items(items = names) { name ->
+            Greeting(name = name)
         }
     }
 }
@@ -71,20 +84,8 @@ fun Greeting(name: String) {
                 Text(text = name, style = MaterialTheme.typography.h3)
             }
             Button(onClick = { expanded.value = !expanded.value }) {
-                Text(text = if (expanded.value) "Show less" else "Show more")
+                Text(text = if (expanded.value) stringResource(R.string.show_less) else stringResource(R.string.show_more))
             }
-        }
-    }
-}
-
-@Composable
-fun LoopingText(
-    modifier: Modifier = Modifier,
-    names: List<String> = List(100) { "$it" },
-) {
-    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
-        items(items = names) { name ->
-            Greeting(name = name)
         }
     }
 }
