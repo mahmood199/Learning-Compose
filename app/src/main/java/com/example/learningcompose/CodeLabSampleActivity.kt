@@ -68,7 +68,7 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello,")
-                Text(text = name)
+                Text(text = name, style = MaterialTheme.typography.h3)
             }
             Button(onClick = { expanded.value = !expanded.value }) {
                 Text(text = if (expanded.value) "Show less" else "Show more")
