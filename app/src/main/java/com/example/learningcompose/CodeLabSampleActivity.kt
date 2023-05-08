@@ -3,6 +3,8 @@ package com.example.learningcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +17,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
@@ -83,6 +87,51 @@ fun LoopingText(
     }
 }
 
+@Composable
+fun MyApp2(modifier: Modifier = Modifier) {
+
+    var shouldShowOnboarding = remember { mutableStateOf(true) }
+
+    Surface(modifier) {
+        if (shouldShowOnboarding.value) {
+            OnboardingScreen(onContinueClicked = { shouldShowOnboarding.value = false })
+        } else {
+            LoopingText()
+        }
+    }
+}
+
+@Composable
+fun OnboardingScreen(
+    modifier: Modifier = Modifier,
+    onContinueClicked: () -> Unit,
+) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Welcome the newbie to Codelabs!")
+        Button(
+            onClick = onContinueClicked
+        ) {
+            Text(text = "Continue")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun MyAppPreview() {
+    LearningComposeTheme {
+        LoopingText(
+            Modifier
+                .fillMaxSize()
+                .background(Color.White)
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
@@ -90,5 +139,13 @@ fun DefaultPreview2() {
         LoopingText(
             modifier = Modifier
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OnboardingPreview() {
+    LearningComposeTheme() {
+        MyApp2(Modifier.fillMaxSize())
     }
 }
