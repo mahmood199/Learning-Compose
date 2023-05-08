@@ -18,7 +18,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,7 +49,7 @@ private fun MyApp(modifier: Modifier = Modifier) {
 
 @Composable
 fun Greeting(name: String) {
-    val expanded = remember {
+    val expanded = rememberSaveable {
         mutableStateOf(false)
     }
     val extraPadding = if (expanded.value) 80.dp else 0.dp
@@ -92,7 +92,7 @@ fun LoopingText(
 @Composable
 fun MyApp2(modifier: Modifier = Modifier) {
 
-    var shouldShowOnboarding = remember { mutableStateOf(true) }
+    val shouldShowOnboarding = rememberSaveable { mutableStateOf(true) }
 
     Surface(modifier) {
         if (shouldShowOnboarding.value) {
