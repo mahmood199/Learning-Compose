@@ -3,6 +3,9 @@ package com.example.learningcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +20,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -31,19 +35,9 @@ class CodeLabSampleActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LearningComposeTheme {
-                MyApp(modifier = Modifier.fillMaxSize())
+
             }
         }
-    }
-}
-
-@Composable
-private fun MyApp(modifier: Modifier = Modifier) {
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colors.secondary
-    ) {
-        Greeting("Android")
     }
 }
 
@@ -52,7 +46,13 @@ fun Greeting(name: String) {
     val expanded = rememberSaveable {
         mutableStateOf(false)
     }
-    val extraPadding = if (expanded.value) 80.dp else 0.dp
+    val extraPadding by animateDpAsState(
+        targetValue = if (expanded.value) 80.dp else 0.dp,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        )
+    )
 
     Surface(
         color = MaterialTheme.colors.secondary,
@@ -65,7 +65,7 @@ fun Greeting(name: String) {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(bottom = extraPadding)
+                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello,")
                 Text(text = name)
@@ -80,7 +80,7 @@ fun Greeting(name: String) {
 @Composable
 fun LoopingText(
     modifier: Modifier = Modifier,
-    names: List<String> = List(100) { "$it" }
+    names: List<String> = List(100) { "$it" },
 ) {
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
         items(items = names) { name ->
@@ -131,23 +131,5 @@ fun MyAppPreview() {
                 .fillMaxSize()
                 .background(Color.White)
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview2() {
-    LearningComposeTheme {
-        LoopingText(
-            modifier = Modifier
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun OnboardingPreview() {
-    LearningComposeTheme() {
-        MyApp2(Modifier.fillMaxSize())
     }
 }
