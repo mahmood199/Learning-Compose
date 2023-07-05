@@ -3,6 +3,7 @@ package com.example.learningcompose.selectables
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -27,6 +29,8 @@ import androidx.compose.ui.unit.dp
 import com.example.learningcompose.R
 import com.example.learningcompose.selectables.models.Answer
 import com.example.learningcompose.ui.theme.LearningComposeTheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 @Composable
 fun Survey(listOf: List<Answer>) {
@@ -49,11 +53,13 @@ fun Survey(listOf: List<Answer>) {
             )
         } else {
             listOf.forEach { answer ->
-                SurveyAnswer(
-                    answer = answer,
-                    isSelected = selectedAnswer.value == answer
-                ) {
-                    selectedAnswer.value = it
+                key(answer.id) {
+                    SurveyAnswer(
+                        answer = answer,
+                        isSelected = selectedAnswer.value == answer
+                    ) {
+                        selectedAnswer.value = it
+                    }
                 }
             }
         }
@@ -96,10 +102,22 @@ fun SurveyAnswer(
             }
         )
     }
+    Row {
+        Column {
+            Thread.sleep(1000)
+            Box {
+                Row {
+
+                }
+            }
+        }
+    }
 }
 
 
-@Preview
+@Preview(showSystemUi = true, showBackground = true,
+    device = "id:pixel_6_pro"
+)
 @Composable
 fun SurveyPreview() {
     LearningComposeTheme {
