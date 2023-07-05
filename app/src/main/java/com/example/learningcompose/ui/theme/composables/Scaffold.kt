@@ -41,6 +41,7 @@ fun LearningScaffold(
     val fabState = remember { mutableStateOf(true) }
 
     Scaffold(
+        modifier = modifier,
         scaffoldState = scaffoldState,
         content = { padding ->
             Content(
@@ -70,15 +71,7 @@ fun Content(
     fabState: MutableState<Boolean>,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxWidth()
-    ) {
-        Text(text = "Some text 1")
-        Text(text = "Some text 2")
-        Text(text = "Some text 3")
-        Text(text = "Some text 4")
-    }
+
 }
 
 @Composable
