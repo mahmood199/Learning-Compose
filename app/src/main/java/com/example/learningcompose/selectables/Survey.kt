@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,9 +19,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -39,14 +36,10 @@ import com.example.learningcompose.R
 import com.example.learningcompose.isScrolledToTheLast
 import com.example.learningcompose.selectables.models.Answer
 import com.example.learningcompose.ui.theme.LearningComposeTheme
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun Survey(listOf: List<Answer>) {
-    val scope = rememberCoroutineScope()
     val lazyListState = rememberLazyListState()
     SurveyOptionsList(listOf, lazyListState)
 }
@@ -90,7 +83,7 @@ fun SurveyOptionsList(listOf: List<Answer>, lazyListState: LazyListState) {
                 JumpToBottom(
                     onClicked = {
                         scope.launch {
-                            lazyListState.scrollToItem(0) // UI logic being applied to lazyListState
+                            lazyListState.animateScrollToItem(0) // UI logic being applied to lazyListState
                         }
                     }, modifier = Modifier
                         .align(Alignment.BottomCenter)
@@ -103,7 +96,7 @@ fun SurveyOptionsList(listOf: List<Answer>, lazyListState: LazyListState) {
 
 @Composable
 fun JumpToBottom(
-    onClicked: () -> Job,
+    onClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     FloatingActionButton(onClick = {
