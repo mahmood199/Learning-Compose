@@ -26,6 +26,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.learningcompose.selectables.SurveyScreen
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 import com.example.learningcompose.ui.theme.Typography
 
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearningComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Texting()
+                SurveyScreen()
             }
         }
     }

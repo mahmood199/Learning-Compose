@@ -1,6 +1,8 @@
 package com.example.learningcompose.selectables
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +21,8 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,13 +44,21 @@ import com.example.learningcompose.ui.theme.LearningComposeTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun Survey(listOf: List<Answer>) {
+fun SurveyScreen(
+    viewModel: SelectablesViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
     val lazyListState = rememberLazyListState()
-    SurveyOptionsList(listOf, lazyListState)
+    SurveyOptionsList(viewModel.answers, lazyListState) {
+        viewModel.remove(it)
+    }
 }
 
 @Composable
-fun SurveyOptionsList(listOf: List<Answer>, lazyListState: LazyListState) {
+fun SurveyOptionsList(
+    listOf: List<Answer>,
+    lazyListState: LazyListState,
+    removeAnswer: (Answer) -> Unit
+) {
     var selectedAnswer by rememberSaveable {
         mutableStateOf<Answer?>(null)
     }
@@ -57,9 +69,7 @@ fun SurveyOptionsList(listOf: List<Answer>, lazyListState: LazyListState) {
                 .fillMaxSize()
         )
     } else {
-        Box() {
-
-
+        Box {
             LazyColumn(
                 state = lazyListState,
                 modifier = Modifier
@@ -73,6 +83,9 @@ fun SurveyOptionsList(listOf: List<Answer>, lazyListState: LazyListState) {
                             isSelected = selectedAnswer == answer,
                             answerClicked = {
                                 selectedAnswer = it
+                            },
+                            removeAnswer = {
+                                removeAnswer(answer)
                             }
                         )
                     }
@@ -111,20 +124,30 @@ fun JumpToBottom(
 fun SurveyAnswer(
     answer: Answer,
     isSelected: Boolean,
-    answerClicked: (Answer) -> Unit
+    answerClicked: (Answer) -> Unit,
+    removeAnswer: (Answer) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .border(
+                BorderStroke(
+                    1.dp,
+                    Color.Red
+                ), shape = RoundedCornerShape(8.dp)
+            )
+            .padding(end = 20.dp)
             .clip(
                 RoundedCornerShape(12.dp)
             )
             .background(Color.White)
             .clickable {
                 answerClicked(answer)
-            },
-        verticalAlignment = Alignment.CenterVertically
+            }
+            ,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(
@@ -142,6 +165,15 @@ fun SurveyAnswer(
                 answerClicked(answer)
             }
         )
+        Icon(
+            imageVector = Icons.Filled.Close,
+            contentDescription = "RemoveIcon",
+            modifier = Modifier
+                .size(24.dp)
+                .clickable {
+                    removeAnswer(answer)
+                }
+        )
     }
 
 }
@@ -154,13 +186,6 @@ fun SurveyAnswer(
 @Composable
 fun SurveyPreview() {
     LearningComposeTheme {
-        Survey(
-            listOf(
-                Answer(0, "First Answer", true),
-                Answer(1, "Second Answer", false),
-                Answer(2, "Third Answer", false),
-                Answer(3, "Fourth Answer", false),
-            )
-        )
+        SurveyScreen()
     }
 }
