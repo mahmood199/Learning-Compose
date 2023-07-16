@@ -36,7 +36,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearningComposeTheme {
                 // A surface container using the 'background' color from the theme
+/*
                 SurveyScreen()
+*/
+                Column() {
+                    
+                }
+                ExpandableCard(title = "Hello Title", description = stringResource(id = R.string.demo_text))
             }
         }
     }
