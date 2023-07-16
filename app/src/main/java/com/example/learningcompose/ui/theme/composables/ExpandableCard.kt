@@ -58,7 +58,7 @@ fun ExpandableCard() {
         .wrapContentHeight()
         .animateContentSize(
             animationSpec = tween(
-                500,
+                250,
                 easing = LinearOutSlowInEasing
             )
         ), shape = Shapes.small,

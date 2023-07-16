@@ -1,5 +1,6 @@
 package com.example.learningcompose
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.learningcompose.animation.Animation
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 
 class CodeLabSampleActivity : ComponentActivity() {
@@ -36,7 +39,7 @@ class CodeLabSampleActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LearningComposeTheme {
-
+                Animation()
             }
         }
     }
@@ -47,7 +50,7 @@ fun LoopingText(
     modifier: Modifier = Modifier,
     names: List<String> = List(100) { "$it" },
 ) {
-    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
+    LazyColumn(contentPadding = PaddingValues(vertical = 12.dp)) {
         items(items = names) { name ->
             Greeting(name = name)
         }
@@ -123,14 +126,20 @@ fun OnboardingScreen(
     }
 }
 
-@Preview
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "DefaultPreviewLight"
+)
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "DefaultPreviewDark"
+)
 @Composable
 fun MyAppPreview() {
     LearningComposeTheme {
-        LoopingText(
+        Animation(
             Modifier
                 .fillMaxSize()
-                .background(Color.White)
         )
     }
 }
