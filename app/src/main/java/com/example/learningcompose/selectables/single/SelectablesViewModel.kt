@@ -1,8 +1,8 @@
-package com.example.learningcompose.selectables
+package com.example.learningcompose.selectables.single
 
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
-import com.example.learningcompose.selectables.models.Answer
+import com.example.learningcompose.selectables.single.Answer
 
 class SelectablesViewModel() : ViewModel() {
 

@@ -17,7 +17,6 @@ class CodeLabSampleActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LearningComposeTheme {
-                StrokeText()
             }
         }
     }
@@ -32,7 +31,6 @@ fun MyAppPreview() {
                 .fillMaxWidth()
                 .background(Color.Gray)
         ) {
-            DrawTextLayoutResultSample()
         }
     }
 }
