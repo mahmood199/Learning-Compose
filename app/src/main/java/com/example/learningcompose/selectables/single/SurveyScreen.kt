@@ -1,4 +1,4 @@
-package com.example.learningcompose.selectables
+package com.example.learningcompose.selectables.single
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -39,7 +39,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learningcompose.R
 import com.example.learningcompose.isScrolledToTheLast
-import com.example.learningcompose.selectables.models.Answer
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 import kotlinx.coroutines.launch
 
