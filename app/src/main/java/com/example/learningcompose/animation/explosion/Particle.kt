@@ -3,7 +3,6 @@ package com.example.learningcompose.animation.explosion
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlin.math.pow
-import kotlin.random.Random
 
 class Particle(
     val color: Color,

@@ -8,7 +8,6 @@ fun Float.mapInRange(inMin: Float, inMax: Float, outMin: Float, outMax: Float): 
     return outMin + (((this - inMin) / (inMax - inMin)) * (outMax - outMin))
 }
 
-fun Int.dpToPx() = toFloat().dpToPx()
 fun Dp.toPx() = value.dpToPx()
 
 fun Float.dpToPx() = this * Resources.getSystem().displayMetrics.density
