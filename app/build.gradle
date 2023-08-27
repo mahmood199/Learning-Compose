@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.learningcompose'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.learningcompose"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -67,4 +67,7 @@ dependencies {
     implementation "androidx.compose.material:material-icons-extended:1.4.3"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_ui_version"
 
+    def nav_version = "2.7.1"
+
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 }
