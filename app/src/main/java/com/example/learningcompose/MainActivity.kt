@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.learningcompose.navigation.RootWidget
 import com.example.learningcompose.selectables.multiple.SelectionGrid
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LearningComposeTheme {
-                SelectionGrid()
+                RootWidget()
             }
         }
     }
@@ -32,7 +33,7 @@ fun DefaultPreview() {
                 .fillMaxWidth()
                 .background(Color.Gray)
         ) {
-            SelectionGrid()
+            RootWidget()
         }
     }
 }
