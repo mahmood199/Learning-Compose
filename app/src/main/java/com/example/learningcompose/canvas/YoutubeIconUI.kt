@@ -37,6 +37,7 @@ fun YouTubeIconUI() {
             moveTo(width * 0.4f, height * 0.35f)
             lineTo(width * 0.4f, height * 0.65f)
             lineTo(width * 0.7f, height * 0.5f)
+            close()
         }
 
         drawPath(
