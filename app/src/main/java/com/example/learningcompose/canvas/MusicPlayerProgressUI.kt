@@ -106,6 +106,7 @@ fun MusicPlayerProgressUI() {
                     }
                     startX += 20f
                 }
+                close()
             }
         }
 
