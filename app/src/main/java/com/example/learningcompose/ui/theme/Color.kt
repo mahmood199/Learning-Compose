@@ -66,3 +66,8 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 
 val seed = Color(0xFF825500)
+val SilverChalice = Color(0xFF999CA0)
+val ElectricBlue = Color(0xFF0E6FFF)
+val SoftBabyBlue = Color(0xFFA6C7FF)
+val NaturalGreen = Color(0xFF4AD15F)
+val Silver = Color(0xFFF5F5F5)
