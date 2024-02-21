@@ -85,7 +85,8 @@ private fun ChatViewUI() {
             item("right_chat_2") {
                 Row(
                     horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .fillMaxWidth(0.9f)
                 ) {
                     Spacer(
@@ -123,11 +124,6 @@ private fun ChatViewUI() {
                         Text(text = "Some text ")
                     }
 
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxWidth(0.1f)
-                            .aspectRatio(1f)
-                    )
                 }
             }
 
