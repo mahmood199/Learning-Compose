@@ -49,19 +49,23 @@ class MiddleBulgeShapeV2 : Shape {
 
             lineTo(width * 0.0f, topHeight)
 
-            lineTo(width * 0.45f - circleRadiusInPx, topHeight)
+            lineTo(width * 0.4f - circleRadiusInPx, topHeight)
 
 
             cubicTo(
-                x1 = width * 0.45f - circleRadiusInPx,
-                y1 = topHeight,
-                x2 = width * 0.5f,
-                y2 = -20f,
-                x3 = width * 0.55f + circleRadiusInPx,
-                y3 = topHeight
+                x1 = width * 0.4f, y1 = topHeight,
+                x2 = width * 0.45f, y2 = -30f,
+                x3 = width * 0.55f, y3 = topHeight / 2
             )
 
-            lineTo(width * 0.55f + circleRadiusInPx, topHeight)
+            cubicTo(
+                x1 = width * 0.45f, y1 = topHeight,
+                x2 = width * 0.5f, y2 = -30f,
+                x3 = width * 0.6f, y3 = topHeight / 2
+            )
+
+
+            lineTo(width * 0.6f + circleRadiusInPx, topHeight)
 
             lineTo(width * 1.0f, topHeight)
 
