@@ -3,11 +3,14 @@ package com.example.learningcompose.layout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -71,8 +74,13 @@ fun OverlappingUIPreview() {
     }
 
     LearningComposeTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            LazyRow(modifier = Modifier.fillMaxWidth(), contentPadding = PaddingValues(12.dp)) {
+        Column(modifier = Modifier.fillMaxSize()) {
+
+            val state = rememberLazyListState()
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(12.dp)
+            ) {
                 item {
                     OverlappingUI(overlappingFactor = 0.15f) {
                         for (number in numbers) {
@@ -89,6 +97,30 @@ fun OverlappingUIPreview() {
                     }
                 }
             }
+
+            LazyRow(
+                state = state,
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(12.dp)
+            ) {
+                items(numbers.size) {
+                    var offset = 0.dp
+                    numbers.forEachIndexed { index, number ->
+                        Box(
+                            modifier = Modifier
+                                .fillParentMaxWidth(0.15f)
+                                .aspectRatio(1f)
+                                .offset(offset)
+                                .background(Color(number.second), CircleShape)
+                                .border(2.dp, Color.Blue, CircleShape)
+                        ) {
+
+                        }
+                        offset -= 8.dp
+                    }
+                }
+            }
+
         }
     }
 }
