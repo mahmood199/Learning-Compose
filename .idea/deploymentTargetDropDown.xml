@@ -2,6 +2,18 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="LookAheadUIPreview">
+        <State />
+      </entry>
+      <entry key="LookAheadUIPreview (1)">
+        <State />
+      </entry>
+      <entry key="LookAheadWithApproachLayoutModifierPreview">
+        <State />
+      </entry>
+      <entry key="LookAheadWithCustomApproachLayoutModifierNodePreview">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
