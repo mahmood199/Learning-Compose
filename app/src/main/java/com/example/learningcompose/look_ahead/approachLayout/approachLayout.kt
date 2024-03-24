@@ -1,5 +1,6 @@
 package com.example.learningcompose.look_ahead.approachLayout
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -34,13 +35,16 @@ fun LookAheadWithApproachLayoutModifier() {
     var isInColumn by remember { mutableStateOf(true) }
     // Creates movable content with [LookaheadScope] as receiver containing 4 boxes.
     // They will be put either in a [Row] or in a [Column] depending on the state.
+
+    val size by animateDpAsState(targetValue = if (isInColumn) 80.dp else 20.dp, label = "")
+
     val items = remember {
         movableContentWithReceiverOf<LookaheadScope> {
             colors.forEach { color ->
                 Box(
                     Modifier
                         .padding(8.dp)
-                        .size(if (isInColumn) 80.dp else 20.dp)
+                        .size(size)
                         .animateBounds()
                         .background(color, RoundedCornerShape(10))
                 )

@@ -1,5 +1,6 @@
 package com.example.learningcompose.look_ahead.ApproachLayoutModifierNode
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -24,7 +25,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learningcompose.ui.theme.LearningComposeTheme
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LookAheadUI(
     modifier: Modifier = Modifier
@@ -40,6 +40,8 @@ fun LookAheadUI(
 
     var isInColumn by remember { mutableStateOf(true) }
 
+    val animatedDp by animateDpAsState(targetValue = if (isInColumn) 80.dp else 20.dp, label = "")
+
     LookaheadScope {
         val items = remember {
             movableContentOf {
@@ -47,7 +49,7 @@ fun LookAheadUI(
                     Box(
                         Modifier
                             .padding(8.dp)
-                            .size(80.dp)
+                            .size(animatedDp)
                             .animatePlacementInScope(this)
                             .background(color, RoundedCornerShape(10))
                     )

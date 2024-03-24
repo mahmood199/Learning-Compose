@@ -5,6 +5,7 @@ import androidx.compose.animation.core.ExperimentalAnimatableApi
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.round
+import com.example.learningcompose.ui.theme.LearningComposeTheme
 
 context (LookaheadScope)
 @OptIn(ExperimentalAnimatableApi::class, ExperimentalComposeUiApi::class)
@@ -30,8 +32,11 @@ fun Modifier.animateBounds(): Modifier = composed {
 
     approachLayout(
         isMeasurementApproachComplete = {
-            sizeAnim.updateTarget(it.center, scope, tween(2000))
+            true
+/*
+            sizeAnim.updateTarget(it.center, scope, tween(1000))
             sizeAnim.isIdle
+*/
         },
         isPlacementApproachComplete = {
             val target = lookaheadScopeCoordinates.localLookaheadPositionOf(it)
@@ -39,9 +44,12 @@ fun Modifier.animateBounds(): Modifier = composed {
             offsetAnim.isIdle
         }
     ) { measurable, constraints ->
+/*
         val (animWidth, animHeight) = sizeAnim.updateTarget(lookaheadSize.center, scope)
 
-        measurable.measure(Constraints.fixed(animWidth, animHeight))
+*/
+
+        measurable.measure(constraints)
             .run {
                 layout(width, height) {
                     coordinates?.let {
@@ -53,5 +61,15 @@ fun Modifier.animateBounds(): Modifier = composed {
                     } ?: place(0, 0)
                 }
             }
+    }
+}
+
+@Composable
+fun Boring() {
+    LearningComposeTheme {
+
+        LookaheadScope {
+
+        }
     }
 }
